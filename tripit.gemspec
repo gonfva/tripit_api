@@ -13,31 +13,18 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-require 'rubygems'
-require 'rake/gempackagetask'
-
 NAME='tripit'
 
-filelist = Rake::FileList.new
-filelist.include('lib/**/*.rb')
-
-spec = Gem::Specification.new do |s|
+Gem::Specification.new do |s|
     s.name = NAME
     s.author = 'TripIt Inc.'
     s.email = 'support@tripit.com'
     s.homepage = 'http://www.tripit.com'
     s.summary = 'TripIt API Ruby Client Bindings'
+    s.description = "A gem to help integrating with TripIt"
     s.files = ['lib/tripit.rb']
     s.version = '1.0'
     s.add_dependency('json', '>= 0')
+    s.license       = 'Apache-2.0'
 end
 
-Rake::GemPackageTask.new(spec).define
-
-Rake::PackageTask.new(NAME + '_ruby_v1', :noversion) do |pkg|
-    pkg.need_zip = true
-    pkg.need_tar = true
-    pkg.package_files = filelist
-end
-
-task :default => [:repackage]
