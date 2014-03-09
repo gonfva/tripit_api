@@ -21,9 +21,9 @@ Gem::Specification.new do |s|
     s.email = 'support@tripit.com'
     s.homepage = 'http://www.tripit.com'
     s.summary = 'TripIt API Ruby Client Bindings'
-    s.description = "A gem to help integrating with TripIt"
+    s.description = "A gem to help integrating with TripIt API"
     s.files = ['lib/tripit.rb']
-    s.version = '1.0'
+    s.version = '1.0.1'
     s.add_dependency('json', '>= 0')
     s.license       = 'Apache-2.0'
 end
