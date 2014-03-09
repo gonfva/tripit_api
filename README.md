@@ -73,6 +73,8 @@ oauth_credential = TripIt::OAuthCredential.new(
 t = TripIt::API.new(oauth_credential, api_url)
 
 puts t.create(trip_xml).to_xml.to_s
+```
+
 
 
 Additional documentation
