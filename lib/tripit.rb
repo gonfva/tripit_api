@@ -16,6 +16,7 @@
 
 require 'tripit/web_auth_credential'
 require 'tripit/api'
+require 'tripit/travel_obj'
 require 'tripit/oauth_credential'
 require 'rubygems'
 require 'openssl'
@@ -47,95 +48,6 @@ module TripIt
           urlencode(k) + '=' + urlencode(v)
       end.join('&')
   end
-
-
-
-
-
-class TravelObj
-    def self.new(element)
-        children = Hash.new do |h, k|
-            h[k] = []
-        end
-        elements = {}
-        element.elements.each do |e|
-            if /^[A-Z]/.match(e.name)
-                name = e.name.intern
-                klass = if TripIt.const_defined?(name)
-                    TripIt.const_get(name)
-                else
-                    TripIt.const_set(name, Class.new(TravelObj))
-                end
-                children[klass] << klass.new(e)
-            else
-                elements[e.name] = \
-                if e.name[-4..-1] == 'date' or e.name[-4..-1] == 'time'
-                    ::DateTime.parse(e.text)
-                else
-                    e.text
-                end
-            end
-        end
-        if self == TravelObj
-            # Root. There will be just one Response object.
-            children.values.flatten[0]
-        else
-            super(children, elements)
-        end
-    end
-
-    def initialize(children, elements)
-        @children, @elements = children, elements
-    end
-
-    def to_xml(container = REXML::Document.new)
-        element = container.add_element(self.class.name.split('::')[-1])
-        @elements.each_pair do |k, v|
-            if not v.nil?
-                element.add_element(k).text = if v.kind_of? ::DateTime
-                    if k[-4..-1] == 'time'
-                        v.strftime('%H:%M:%S')
-                    else
-                        v.strftime('%Y-%m-%d')
-                    end
-                else
-                    v
-                end
-            end
-        end
-        self[].each do |child|
-            child.to_xml(element)
-        end
-        container
-    end
-
-    def elements
-        @elements.keys
-    end
-
-    def children
-        @children.keys
-    end
-
-    def [](name = nil)
-        if name.nil?
-            @children.values.flatten
-        elsif name.kind_of? Class
-            @children[name]
-        else
-            @elements[name]
-        end
-    end
-
-    def []=(name, value)
-        @elements[name] = value
-    end
-
-    def add_child(obj)
-        @children[obj.class] << obj
-    end
-end
-
 
 end
 
