@@ -9,12 +9,10 @@ class WebAuthTest < Test::Unit::TestCase
     request = Request.new
     assert_equal ['user1','password1'], wauth.authorize(request,nil, nil)
   end
-
-end
-
-class Request
-  def basic_auth(user, pass)
-    [user,pass]
+  class Request
+    def basic_auth(user, pass)
+      [user,pass]
+    end
   end
 end
 
