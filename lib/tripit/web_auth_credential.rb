@@ -12,27 +12,15 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+module TripIt
+  class WebAuthCredential
+    def initialize(username, password)
+        @username, @password = username, password
+    end
 
-require 'rubygems/package_task'
-require 'rake/testtask'
-
-
-NAME='tripit'
-
-filelist = Rake::FileList.new
-filelist.include('lib/**/*.rb')
-
-Rake::PackageTask.new(NAME + '_ruby_v1', :noversion) do |pkg|
-    pkg.need_zip = true
-    pkg.need_tar = true
-    pkg.package_files = filelist
-end
-
-desc "Repackage. If you want to run test, invoke with 'rake test'"
-task :default => [:repackage]
-
-
-Rake::TestTask.new do |t|
-  t.libs << 'test'
+    def authorize(request, url, args)
+        request.basic_auth(@username, @password)
+    end
+  end
 end
 
