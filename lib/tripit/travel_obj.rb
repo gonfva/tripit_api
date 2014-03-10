@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 #
 # Copyright 2008-2012 Concur Technologies, Inc.
 #
@@ -13,46 +12,8 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-
-require 'tripit/web_auth_credential'
-require 'tripit/api'
-require 'tripit/oauth_credential'
-require 'rubygems'
-require 'openssl'
-require 'digest/md5'
-require 'base64'
-require 'net/http'
-require 'net/https'
-require 'uri'
-require 'cgi'
-require 'rexml/document'
-require 'json'
-require 'date'
-
-
-
 module TripIt
-
-
-  # OAuth Core 1.0 Section 5.1 Parameter Encoding
-  def self.urlencode(str)
-      str = str.to_s
-      str.gsub(/[^a-zA-Z0-9_\.\-\~]/n) do |s|
-          sprintf('%%%02X', s.ord)
-      end
-  end
-
-  def self.urlencode_args(args)
-      args.collect do |k, v|
-          urlencode(k) + '=' + urlencode(v)
-      end.join('&')
-  end
-
-
-
-
-
-class TravelObj
+  class TravelObj
     def self.new(element)
         children = Hash.new do |h, k|
             h[k] = []
@@ -134,8 +95,6 @@ class TravelObj
     def add_child(obj)
         @children[obj.class] << obj
     end
-end
-
-
+  end
 end
 
