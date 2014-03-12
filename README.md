@@ -29,10 +29,10 @@ Examples of use
 ### Installation
 
 
-Add `tripit` to your Gemfile. (Warning. gem not yet published to rubygems)
+Add `tripit` to your Gemfile.
 
 ``` ruby
-gem 'tripit'
+gem 'tripit', :git => "git://github.com/gonfva/tripit_api.git"
 ```
 <a name="request">
 ### Obtain a request token
