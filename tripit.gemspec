@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
     s.homepage = 'http://www.tripit.com'
     s.summary = 'TripIt API Ruby Client Bindings'
     s.description = "A gem to help integrating with TripIt API"
-    s.files = ['lib/tripit.rb','lib/tripit/web_auth_credential.rb']
+    s.files = ['lib/tripit.rb','lib/tripit/web_auth_credential.rb','lib/tripit/api.rb','lib/tripit/travel_obj.rb','lib/tripit/oauth_credential.rb']
     s.version = '1.0.1'
     s.add_dependency('json', '>= 0')
     s.license       = 'Apache-2.0'
