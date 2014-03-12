@@ -16,7 +16,7 @@ To that end, we first get a [request token](#request) which is sort of an unauth
 
 With that unauthorised token we redirect the user to the authorisation URL
 
-> https://www.tripit.com/oauth/authorize?oauth_token=<oauth_token>&oauth_callback=<oauth_callback>
+` https://www.tripit.com/oauth/authorize?oauth_token=<oauth_token>&oauth_callback=<oauth_callback>`
 
 The oauth_callback obviously only works for web application (no mobile).
 
