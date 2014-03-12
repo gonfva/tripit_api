@@ -22,8 +22,8 @@ module TripIt
         element.elements.each do |e|
             if /^[A-Z]/.match(e.name)
                 name = e.name.intern
-                klass = if TripIt.const_defined?(name)
-                    TripIt.const_get(name)
+                klass = if TripIt.const_defined?(name,false)
+                    TripIt.const_get(name,false)
                 else
                     TripIt.const_set(name, Class.new(TravelObj))
                 end
