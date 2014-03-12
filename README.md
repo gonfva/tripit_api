@@ -14,9 +14,9 @@ The first step of the process would be to get authorization from the specific us
 
 To that end, we first get a [request token](#request) which is sort of an unauthorised token.
 
-With that unauthorised token we redirect the user to the [authorisation URL]
+With that unauthorised token we redirect the user to the authorisation URL
 
-https://www.tripit.com/oauth/authorize?oauth_token=<oauth_token>&oauth_callback=<oauth_callback>
+> https://www.tripit.com/oauth/authorize?oauth_token=<oauth_token>&oauth_callback=<oauth_callback>
 
 The oauth_callback obviously only works for web application (no mobile).
 
@@ -34,8 +34,8 @@ Add `tripit` to your Gemfile. (Warning. gem not yet published to rubygems)
 ``` ruby
 gem 'tripit'
 ```
-
-### Obtain a request token <a name="request">
+<a name="request">
+### Obtain a request token
 
 ``` ruby
 oauth_credential = TripIt::OAuthCredential.new(
@@ -47,8 +47,8 @@ request_token = t.get_request_token
 print "request token:  #{request_token.token}\n"
 print "request secret: #{request_token.token_secret}\n"
 ```
-
-### Obtain an authorized token <a name="authorize">
+<a name="authorize">
+### Obtain an authorized token
 
 ``` ruby
 oauth_credential = TripIt::OAuthCredential.new(
@@ -61,8 +61,8 @@ authorized_token = t.get_access_token
 print "authorized token:  #{authorized_token.token}\n"
 print "authorized secret: #{authorized_token.token_secret}\n"
 ```
-
-### Actual requests <a name="actual">
+<a name="actual">
+### Actual requests
 
 Get request (list of trips)
 
