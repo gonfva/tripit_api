@@ -3,6 +3,26 @@ tripit
 
 A gem to help integrating with TripIt API. Please see the LICENSE for copyright information.
 
+Overview
+--------
+
+The gem follows the typical oAuth process.
+
+It uses consumer_key and consumer_secret which are provided by TripIt when you register your app in the [developer section](https://www.tripit.com/developer).
+
+The first step of the process would be to get authorization from the specific user. set_host
+
+To that end, we first get a [request token](#request) which is sort of an unauthorised token.
+
+With that unauthorised token we redirect the user to the [authorisation URL]
+
+https://www.tripit.com/oauth/authorize?oauth_token=<oauth_token>&oauth_callback=<oauth_callback>
+
+The oauth_callback obviously only works for web application (no mobile).
+
+Finally, when the application gets the control again, we get an [authorised token](#authorize) and make the [actual call](#actual)
+
+
 Examples of use
 ---------------
 
@@ -15,7 +35,7 @@ Add `tripit` to your Gemfile. (Warning. gem not yet published to rubygems)
 gem 'tripit'
 ```
 
-### Obtain a request token
+### Obtain a request token <a name="request">
 
 ``` ruby
 oauth_credential = TripIt::OAuthCredential.new(
@@ -28,7 +48,7 @@ print "request token:  #{request_token.token}\n"
 print "request secret: #{request_token.token_secret}\n"
 ```
 
-### Obtain an authorized token
+### Obtain an authorized token <a name="authorize">
 
 ``` ruby
 oauth_credential = TripIt::OAuthCredential.new(
@@ -42,7 +62,7 @@ print "authorized token:  #{authorized_token.token}\n"
 print "authorized secret: #{authorized_token.token_secret}\n"
 ```
 
-### Actual requests
+### Actual requests <a name="actual">
 
 Get request (list of trips)
 
@@ -80,5 +100,5 @@ puts t.create(trip_xml).to_xml.to_s
 Additional documentation
 ------------------------
 
-http://tripit.github.io/api/doc/v1/index.html
+You can get more information from the [API site](http://tripit.github.io/api/doc/v1/index.html)
 
