@@ -118,7 +118,7 @@ private
 
         key = @consumer_secret + '&' + @token_secret
 
-        digest = OpenSSL::Digest::Digest.new('sha1')
+        digest = OpenSSL::Digest.new('sha1')
         hashed = OpenSSL::HMAC.digest(digest, key, signature_base_string)
         Base64.encode64(hashed).chomp
     end
